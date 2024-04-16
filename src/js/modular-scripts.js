@@ -16,6 +16,7 @@ potato(globalTater);
 const revealingModule = (function() {
   const immutableVar = "I'm a constant";
   let mutableVar = 0;
+  let debugMode = false;
 
   // This is a map to track which scripts have been loaded
   // We don't want to load the same script multiple times
@@ -27,18 +28,34 @@ const revealingModule = (function() {
   // Babel will transpile this to a regular function
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
   const initResizeListeners = () => {
-    console.info("Resize listeners initialized");
+    if (debugMode) {
+      console.debug("Resize listeners initialized");
+    }
+
     window.addEventListener("resize", function () {
-      console.log("Resize event fired");
+      if (debugMode) {
+        console.debug("Resize event fired");
+      }
+
       mutableVar = window.innerWidth;
-      console.log("Mutable var is now: ", mutableVar);
+
+      if (debugMode) {
+        console.debug("Mutable var is now: ", mutableVar);
+      }
     });
   };
 
+  function onDocClick() {
+    console.log("Click event fired");
+  }
+
   function initEventListeners() {
-    console.info("Event listeners initialized");
+    if (debugMode) {
+      console.debug("Event listeners initialized");
+    }
+
     document.addEventListener("click", function () {
-      console.log("Click event fired");
+      onDocClick();
     });
   }
 
@@ -46,7 +63,10 @@ const revealingModule = (function() {
   // It's recursive, so it will keep checking until the library is available
   function waitForLibrary(lib, callback, timeout) {
     if (window[lib]) {
-      console.info(`${lib} is available`);
+      if (debugMode) {
+        console.debug(`${lib} is available`);
+      }
+
       callback();
     } else {
       console.warn(`${lib} is not available yet, waiting...`);
@@ -56,17 +76,41 @@ const revealingModule = (function() {
     }
   }
 
+  // This function will execute a callback when the document is ready
+  // It will check if the document is already ready, and if so, execute the callback immediately
   function documentReady(fn) {
     document.addEventListener("DOMContentLoaded", () => {
       if (document.readyState === "interactive" || document.readyState === "complete") {
-        console.info("Document is ready");
+        if (debugMode) {
+          console.debug("Document is ready");
+        }
         fn();
       }
     });
   }
 
+  // this functino checks if a URL is valid
+  function isValidURL(url) {
+    try {
+      new URL(url);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // This function will inject a library into the page
+  // It will only inject the library once, even if called multiple times
   function injectLibrary(url) {
-    console.info("Injecting library:", url);
+    if (!isValidURL(url)) {
+      console.error("Invalid URL:", url);
+      return;
+    }
+
+    if (debugMode) {
+      console.debug("Injecting library:", url);
+    }
+
     if (LOADED_SCRIPTS[url]) {
       console.warn("Library already loaded, skipping:", url);
       return;
@@ -81,8 +125,11 @@ const revealingModule = (function() {
   }
 
   // The init function is the entrypoint to the revealing module
-  function init() {
+  function init(debug = false) {
     console.info("Module started");
+    if (debug) {
+      debugMode = true;
+    }
 
     // wait for jQuery to become available
     waitForLibrary("jQuery", function () {
