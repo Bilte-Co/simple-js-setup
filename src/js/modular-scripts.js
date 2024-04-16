@@ -19,8 +19,8 @@ const revealingModule = (function() {
   let mutableVar = 0;
   let debugMode = false;
 
-  // This is a map to track which scripts have been loaded
-  // We don't want to load the same script multiple times
+  // This is a Set, which is a collection of unique values
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
   const LOADED_SCRIPTS = new Set();
 
   // this is a private function, it's not exposed outside of the module
@@ -81,7 +81,10 @@ const revealingModule = (function() {
   // It will check if the document is already ready, and if so, execute the callback immediately
   function documentReady(fn) {
     document.addEventListener("DOMContentLoaded", () => {
-      if (document.readyState === "interactive" || document.readyState === "complete") {
+      if (
+        document.readyState === "interactive" ||
+        document.readyState === "complete"
+      ) {
         if (debugMode) {
           console.debug("Document is ready");
         }
@@ -133,13 +136,19 @@ const revealingModule = (function() {
     }
 
     // wait for jQuery to become available
-    waitForLibrary("jQuery", function () {
-      initEventListeners();
-      initResizeListeners();
-    }, 100);
+    waitForLibrary(
+      "jQuery",
+      function () {
+        initEventListeners();
+        initResizeListeners();
+      },
+      100
+    );
 
     // inject jQuery
-    injectLibrary("https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js");
+    injectLibrary(
+      "https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    );
 
     // dispatch a custom event when the module is loaded
     document.dispatchEvent(loadedEvent);
@@ -147,7 +156,7 @@ const revealingModule = (function() {
 
   return {
     start: init,
-    documentReady: documentReady
+    documentReady: documentReady,
   };
 }());
 
