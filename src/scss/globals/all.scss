@@ -1,0 +1,56 @@
+:root {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-neutral: #f4f7f8;
+
+  --color-violet: #7b27ff;
+  --color-dark-violet: #25006d;
+
+  --color-crimson: #ff2e4e;
+  --color-dark-crimson: #590011;
+
+  --color-gold: #ffbd29;
+  --color-dark-gold: #efad18;
+
+  --color-cyan: #00ddf4;
+  --color-dark-cyan: #55c1e6;
+
+  --color-legacy-blue: #0054d7;
+
+  --color-magenta: #e424ff;
+  --color-dark-magenta: #540063;
+
+  --color-lime: #b2f000;
+
+  --color-dark-green: #316200;
+
+  --color-error-red: #c11b33;
+
+  --color-gray-100: #f2f0f5;
+  --color-gray-200: #edeaef;
+  --color-gray-300: #b4b3b6;
+  --color-gray-400: #8f8e91;
+  --color-gray-500: #6b676f;
+  --color-gray-800: #333333;
+
+  --bar-bg-color: var(--color-black);
+  --bar-text-color: var(--color-white);
+  --bar-text-hover-color: var(--color-gray-200);
+
+  --slideout-bg-color: var(--color-black);
+  --slideout-text-color: var(--color-white);
+  --slideout-cta-bg-color: var(--color-white);
+  --slideout-cta-bg-hover-color: var(--color-gray-200);
+  --slideout-cta-text-color: var(--color-black);
+
+  --modal-bg-color: var(--color-white);
+  --modal-text-color: var(--color-black);
+  --modal-cta-bg-color: var(--color-black);
+  --modal-cta-bg-hover-color: var(--color-gray-800);
+  --modal-cta-text-color: var(--color-white);
+
+  --cta-arrow-white: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.4773 8.02084H0.599609V5.97913H9.4773L5.54888 2.05071L6.99998 0.599609L13.4004 6.99998L6.99998 13.4004L5.54888 11.9493L9.4773 8.02084Z' fill='white'/%3E%3C/svg%3E%0A");
+  --cta-arrow-white-hover: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.4773 8.02084H0.599609V5.97913H9.4773L5.54888 2.05071L6.99998 0.599609L13.4004 6.99998L6.99998 13.4004L5.54888 11.9493L9.4773 8.02084Z' fill='#edeaef'/%3E%3C/svg%3E%0A");
+  --cta-arrow-black: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.4773 8.02084H0.599609V5.97913H9.4773L5.54888 2.05071L6.99998 0.599609L13.4004 6.99998L6.99998 13.4004L5.54888 11.9493L9.4773 8.02084Z' fill='black'/%3E%3C/svg%3E%0A");
+  --cta-arrow-black-hover: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.4773 8.02084H0.599609V5.97913H9.4773L5.54888 2.05071L6.99998 0.599609L13.4004 6.99998L6.99998 13.4004L5.54888 11.9493L9.4773 8.02084Z' fill='#333333'/%3E%3C/svg%3E%0A");
+}

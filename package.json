@@ -3,15 +3,22 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "yarn run scripts:transpile && yarn run scripts:minify",
-    "watch": "yarn run scripts:transpile --watch",
+    "build": "yarn run scripts:transpile && yarn run scripts:minify && yarn run styles:transpile && yarn run styles:minify",
+    "watch": "yarn run scripts:transpile --watch & yarn run styles:transpile --watch",
     "scripts:transpile": "babel src/js/modular-scripts.js -d src/compiled --presets=@babel/preset-env",
-    "scripts:minify": "terser src/compiled/modular-scripts.js -c -o src/compiled/minified-scripts.min.js"
+    "scripts:minify": "terser src/compiled/modular-scripts.js -c -o src/compiled/minified-scripts.min.js",
+    "styles:transpile": "sass --no-embed-source-map src/scss/styles.scss src/compiled/styles.css",
+    "styles:minify": "postcss src/compiled/styles.css --use autoprefixer cssnano -o src/compiled/minified-styles.min.css"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.1",
     "@babel/core": "^7.24.4",
     "@babel/preset-env": "^7.24.4",
+    "autoprefixer": "^10.4.19",
+    "cssnano": "^6.1.2",
+    "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.0",
+    "sass": "^1.75.0",
     "terser": "^5.30.3"
   }
 }
