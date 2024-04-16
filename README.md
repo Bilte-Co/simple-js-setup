@@ -1,6 +1,6 @@
 # Simple JS Setup
 
-This is a very straight-forward setup to transpile and compress javascript files for web use. There is no bundling or anything of that sort, just ensuring the code runs in the browser and minifying it if needed.
+This is a very straight-forward setup to transpile and compress javascript files for web use using [Terser](https://terser.org) and Babel. There is no bundling or anything of that sort, just ensuring the code runs in the browser and minifying it if needed. It uses a fairly bare bones setup and can be extended if needed.
 
 ## Setup
 
