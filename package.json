@@ -5,10 +5,14 @@
   "scripts": {
     "build": "yarn run scripts:transpile && yarn run scripts:minify && yarn run styles:transpile && yarn run styles:minify",
     "watch": "yarn run scripts:transpile --watch & yarn run styles:transpile --watch",
+    "build:js": "yarn run scripts:transpile && yarn run scripts:minify",
+    "watch:js": "yarn run scripts:transpile --watch",
+    "build:css": "yarn run styles:transpile && yarn run styles:minify",
+    "watch:css": " yarn run styles:transpile --watch",
     "scripts:transpile": "babel src/js/modular-scripts.js -d src/compiled --presets=@babel/preset-env",
-    "scripts:minify": "terser src/compiled/modular-scripts.js -c -o src/compiled/minified-scripts.min.js",
+    "scripts:minify": "terser src/compiled/modular-scripts.js -c -o src/compiled/modular-scripts.min.js",
     "styles:transpile": "sass --no-embed-source-map src/scss/styles.scss src/compiled/styles.css",
-    "styles:minify": "postcss src/compiled/styles.css --use autoprefixer cssnano -o src/compiled/minified-styles.min.css"
+    "styles:minify": "postcss src/compiled/styles.css --use autoprefixer cssnano -o src/compiled/styles.min.css"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.1",
