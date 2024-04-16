@@ -2,6 +2,8 @@ function potato(honk) {
   console.log(honk);
 }
 
+// this is a revealing module pattern, which is a way to encapsulate code and only expose the parts you want to
+// it's a good way to keep your code organized and prevent global scope pollution
 const revealingModule = (function() {
   const immutableVar = "I'm a constant";
   let mutableVar = "I'm a variable";
@@ -20,6 +22,8 @@ const revealingModule = (function() {
     });
   }
 
+  // This function will wait for a library to become available before executing a callback
+  // It's recursive, so it will keep checking until the library is available
   function waitForLibrary(lib, callback) {
     if (window[lib]) {
       callback();
@@ -30,6 +34,7 @@ const revealingModule = (function() {
     }
   }
 
+  // The init function is the entrypoint to the revealing module
   function init() {
     console.info('Module started');
 
@@ -46,4 +51,5 @@ const revealingModule = (function() {
   }
 }());
 
+// this will start the module. You could wrap this in a document ready event if you wanted
 revealingModule.start();
