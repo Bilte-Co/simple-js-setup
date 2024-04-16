@@ -15,6 +15,7 @@ potato(globalTater);
 // https://gist.github.com/zcaceres/bb0eec99c02dda6aac0e041d0d4d7bf2
 const revealingModule = (function() {
   const immutableVar = "I'm a constant";
+  const loadedEvent = new Event("moduleLoaded");
   let mutableVar = 0;
   let debugMode = false;
 
@@ -139,6 +140,9 @@ const revealingModule = (function() {
 
     // inject jQuery
     injectLibrary("https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js");
+
+    // dispatch a custom event when the module is loaded
+    document.dispatchEvent(loadedEvent);
   }
 
   return {
@@ -148,6 +152,6 @@ const revealingModule = (function() {
 }());
 
 // this will start the module. You could wrap this in a document ready event if you wanted
-revealingModule.start();
+// revealingModule.start(true);
 // here is a self-made doc ready function that isn't reliant on jQuery
 // revealingModule.documentReady(revealingModule.start());
