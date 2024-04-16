@@ -1,12 +1,12 @@
 # Simple JS Setup
 
-This is a very straight-forward setup to transpile and compress javascript files for web use using [Terser](https://terser.org) and Babel. There is no bundling or anything of that sort, just ensuring the code runs in the browser and minifying it if needed. It uses a fairly bare bones setup and can be extended if needed.
+This is a very straight-forward setup to transpile and compress javascript files for web use using [Babel](https://babeljs.io) and [Terser](https://terser.org) respectively. There is no bundling or anything of that sort, just ensuring the code runs in the browser and minifying it if needed. It uses a fairly bare bones setup and can be extended if needed.
 
 ## Setup
 
 ### Node
 
-Make sure you have [node](https://nodejs.org/en/download) installed on your machine.
+Make sure you have [node](https://nodejs.org/en/download) installed on your machine. This was put together using node `v20.11.0`.
 
 ### Yarn
 
