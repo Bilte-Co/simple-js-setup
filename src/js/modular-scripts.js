@@ -9,6 +9,10 @@ const revealingModule = (function() {
   const immutableVar = "I'm a constant";
   let mutableVar = "I'm a variable";
 
+  // This is a map to track which scripts have been loaded
+  // We don't want to load the same script multiple times
+  const LOADED_SCRIPTS = {};
+
   // this is a private function, it's not exposed outside of the module
   // since it's not returned in the object at the end
   // it is also an arrow function, which is a newer way to define functions
@@ -48,11 +52,17 @@ const revealingModule = (function() {
     });
   }
 
-  function injectLibrary(url, id = null) {
+  function injectLibrary(url) {
+    if (LOADED_SCRIPTS[url]) {
+      return;
+    }
+
     const script = document.createElement("script");
     script.type = "text/javascript";
     script.src = url;
     document.head.appendChild(script);
+
+    LOADED_SCRIPTS[url] = true;
   }
 
   // The init function is the entrypoint to the revealing module
