@@ -1,6 +1,13 @@
+var globalTater = "I'm a global potato";
+
+// this is a global function, it's available everywhere
 function potato(honk) {
   console.log(honk);
 }
+
+// The danger of global variables is that they can be overwritten by other scripts,
+// or you can accidentally overwrite them yourself
+potato(globalTater);
 
 // this is a revealing module pattern, which is a way to encapsulate code and only expose the parts you want to
 // it's a good way to keep your code organized and prevent global scope pollution
