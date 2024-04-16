@@ -21,7 +21,7 @@ const revealingModule = (function() {
 
   // This is a map to track which scripts have been loaded
   // We don't want to load the same script multiple times
-  const LOADED_SCRIPTS = {};
+  const LOADED_SCRIPTS = new Set();
 
   // this is a private function, it's not exposed outside of the module
   // since it's not returned in the object at the end
@@ -112,7 +112,7 @@ const revealingModule = (function() {
       console.debug("Injecting library:", url);
     }
 
-    if (LOADED_SCRIPTS[url]) {
+    if (LOADED_SCRIPTS.has(url)) {
       console.warn("Library already loaded, skipping:", url);
       return;
     }
@@ -122,7 +122,7 @@ const revealingModule = (function() {
     script.src = url;
     document.head.appendChild(script);
 
-    LOADED_SCRIPTS[url] = true;
+    LOADED_SCRIPTS.add(url);
   }
 
   // The init function is the entrypoint to the revealing module
