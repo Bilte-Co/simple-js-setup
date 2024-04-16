@@ -1,0 +1,17 @@
+{
+  "name": "simple-js-setup",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn run scripts:transpile && yarn run scripts:minify",
+    "watch": "yarn run scripts:transpile --watch",
+    "scripts:transpile": "babel src/js/modular-scripts.js -d src/compiled --presets=@babel/preset-env",
+    "scripts:minify": "terser src/compiled/modular-scripts.js -c -o src/compiled/minified-scripts.min.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.4",
+    "@babel/preset-env": "^7.24.4",
+    "terser": "^5.30.3"
+  }
+}
