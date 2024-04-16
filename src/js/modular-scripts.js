@@ -9,12 +9,13 @@ function potato(honk) {
 // or you can accidentally overwrite them yourself
 potato(globalTater);
 
-// this is a revealing module pattern, which is a way to encapsulate code and only expose the parts you want to
+// this is a revealing module pattern, which is a way to namespace or encapsulate code and
+// only expose the parts you want to.
 // it's a good way to keep your code organized and prevent global scope pollution
 // https://gist.github.com/zcaceres/bb0eec99c02dda6aac0e041d0d4d7bf2
 const revealingModule = (function() {
   const immutableVar = "I'm a constant";
-  let mutableVar = "I'm a variable";
+  let mutableVar = 0;
 
   // This is a map to track which scripts have been loaded
   // We don't want to load the same script multiple times
@@ -29,6 +30,8 @@ const revealingModule = (function() {
     console.info("Resize listeners initialized");
     window.addEventListener("resize", function () {
       console.log("Resize event fired");
+      mutableVar = window.innerWidth;
+      console.log("Mutable var is now: ", mutableVar);
     });
   };
 
@@ -41,26 +44,31 @@ const revealingModule = (function() {
 
   // This function will wait for a library to become available before executing a callback
   // It's recursive, so it will keep checking until the library is available
-  function waitForLibrary(lib, callback) {
+  function waitForLibrary(lib, callback, timeout) {
     if (window[lib]) {
+      console.info(`${lib} is available`);
       callback();
     } else {
+      console.warn(`${lib} is not available yet, waiting...`);
       setTimeout(() => {
         waitForLibrary(lib, callback);
-      }, 100);
+      }, timeout);
     }
   }
 
   function documentReady(fn) {
     document.addEventListener("DOMContentLoaded", () => {
       if (document.readyState === "interactive" || document.readyState === "complete") {
+        console.info("Document is ready");
         fn();
       }
     });
   }
 
   function injectLibrary(url) {
+    console.info("Injecting library:", url);
     if (LOADED_SCRIPTS[url]) {
+      console.warn("Library already loaded, skipping:", url);
       return;
     }
 
@@ -76,15 +84,14 @@ const revealingModule = (function() {
   function init() {
     console.info("Module started");
 
-    // inject jQuery
-    injectLibrary("https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js");
-
     // wait for jQuery to become available
     waitForLibrary("jQuery", function () {
-      console.log("jQuery is available");
       initEventListeners();
       initResizeListeners();
-    });
+    }, 100);
+
+    // inject jQuery
+    injectLibrary("https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js");
   }
 
   return {
@@ -94,5 +101,6 @@ const revealingModule = (function() {
 }());
 
 // this will start the module. You could wrap this in a document ready event if you wanted
-
-revealingModule.documentReady(revealingModule.start());
+revealingModule.start();
+// here is a self-made doc ready function that isn't reliant on jQuery
+// revealingModule.documentReady(revealingModule.start());
