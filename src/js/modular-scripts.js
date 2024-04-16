@@ -6,7 +6,8 @@ function potato(honk) {
 }
 
 // The danger of global variables is that they can be overwritten by other scripts,
-// or you can accidentally overwrite them yourself
+// or you can accidentally overwrite them yourself.
+// This is especially dangerous if you have something like utility functions that are used everywhere.
 potato(globalTater);
 
 // this is a revealing module pattern, which is a way to namespace or encapsulate code and
